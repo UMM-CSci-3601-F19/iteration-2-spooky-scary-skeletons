@@ -13,6 +13,9 @@ import umm3601.user.UserRequestHandler;
 
 import static spark.Spark.*;
 import java.io.InputStream;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Server {
   private static final String userDatabaseName = "dev";
@@ -34,6 +37,15 @@ public class Server {
     UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
     LaundryController laundryController = new LaundryController(machineDatabase, roomDatabase, machinePollingDatabase);
     LaundryRequestHandler laundryRequestHandler = new LaundryRequestHandler(laundryController);
+
+    // HappyHedgehogs code base - threading for updated current machine database.
+    final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    executorService.scheduleAtFixedRate(new Runnable() {
+      @Override
+      public void run() {
+        pollFromServer(mongoClient);
+      }
+    }, 0, 1, TimeUnit.MINUTES);
 
     //Configure Spark
     port(serverPort);
@@ -106,6 +118,12 @@ public class Server {
       res.status(404);
       return "Sorry, we couldn't find that!";
     });
+  }
+
+  // Updated CurrentPolling from HappyHedgehogGit
+  private static void pollFromServer(MongoClient mongoClient) {
+    mongoClient.dropDatabase("dev");
+    PollingService pollingService = new PollingService(mongoClient);
   }
 
   // Enable GZIP for all responses
