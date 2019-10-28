@@ -21,18 +21,18 @@ public class LaundryController {
   /*
    * This is a switch for the E2E test
    * before running the tests
-   * set seedlocalSourse to be true,
+   * set seedLocalSource to be true,
    * after testing, set the boolean
    * back to true in order to make
-   * the functionailty works.
+   * the functionality works.
    */
-  private boolean seedLocalSourse = false;
+  private boolean seedLocalSource = false;
 
   public LaundryController(MongoDatabase machineDatabase, MongoDatabase roomDatabase, MongoDatabase machinePollingDatabase)  {
     this.pullingDatabase = machinePollingDatabase;
     machineCollection = machineDatabase.getCollection("machines");
     roomCollection = roomDatabase.getCollection("rooms");
-    if (!seedLocalSourse){
+    if (!seedLocalSource){
       machinePollingCollection = machinePollingDatabase.getCollection("machineDataFromPollingAPI");
     } else {
       machinePollingCollection = machineDatabase.getCollection("machines");
@@ -77,7 +77,7 @@ public class LaundryController {
 
   private void updateMachines() {
 
-    if (!seedLocalSourse){
+    if (!seedLocalSource){
       machinePollingCollection = pullingDatabase.getCollection("machineDataFromPollingAPI");
     } else {
       machinePollingCollection = pullingDatabase.getCollection("machines");
