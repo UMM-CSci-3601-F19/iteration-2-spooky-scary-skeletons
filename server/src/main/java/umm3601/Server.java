@@ -18,34 +18,37 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Server {
+  // TODO: Delete user?
   private static final String userDatabaseName = "dev";
-  private static final String machineDatabaseName = "dev";
-  private static final String machinePollingDatabaseName = "dev";
-  private static final String roomDatabaseName = "dev";
+  // Historic Databases (not used yet)
+  private static final String historicMachineDatabaseName = "dev";
+  private static final String historicMachinePollingDatabaseName = "dev";
+  private static final String roomDatabaseName = "cur";
+  // Up-to-date Databases (in use now)
+  private static final String currentMachineDatabaseName = "cur";
+  private static final String currentMachinePollingDatabaseName = "cur";
+  
   private static final int serverPort = 4567;
 
   public static void main(String[] args) {
 
     MongoClient mongoClient = new MongoClient();
     MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
-    MongoDatabase machineDatabase = mongoClient.getDatabase(machineDatabaseName);
-    MongoDatabase machinePollingDatabase = mongoClient.getDatabase(machinePollingDatabaseName);
+    // historic data
+    MongoDatabase historicMachineDatabase = mongoClient.getDatabase(historicMachineDatabaseName);
+    MongoDatabase historicMachinePollingDatabase = mongoClient.getDatabase(historicMachinePollingDatabaseName);
+    // current data
+    MongoDatabase currentMachineDatabase = mongoClient.getDatabase(currentMachineDatabaseName);
+    MongoDatabase currentMachinePollingDatabase = mongoClient.getDatabase(currentMachinePollingDatabaseName);
+    // rooms
     MongoDatabase roomDatabase = mongoClient.getDatabase(roomDatabaseName);
 
     PollingService pollingService = new PollingService(mongoClient);
     UserController userController = new UserController(userDatabase);
     UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
-    LaundryController laundryController = new LaundryController(machineDatabase, roomDatabase, machinePollingDatabase);
+    // pass in the constantly updating collection.
+    LaundryController laundryController = new LaundryController(currentMachineDatabase, roomDatabase, currentMachinePollingDatabase);
     LaundryRequestHandler laundryRequestHandler = new LaundryRequestHandler(laundryController);
-
-    // HappyHedgehogs code base - threading for updated current machine database.
-    final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    executorService.scheduleAtFixedRate(new Runnable() {
-      @Override
-      public void run() {
-        pollFromServer(mongoClient);
-      }
-    }, 0, 1, TimeUnit.MINUTES);
 
     //Configure Spark
     port(serverPort);
@@ -118,12 +121,6 @@ public class Server {
       res.status(404);
       return "Sorry, we couldn't find that!";
     });
-  }
-
-  // Updated CurrentPolling from HappyHedgehogGit
-  private static void pollFromServer(MongoClient mongoClient) {
-    mongoClient.dropDatabase("dev");
-    PollingService pollingService = new PollingService(mongoClient);
   }
 
   // Enable GZIP for all responses

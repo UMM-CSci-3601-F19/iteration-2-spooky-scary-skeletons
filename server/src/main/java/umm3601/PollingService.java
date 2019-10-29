@@ -1,6 +1,7 @@
 package umm3601;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -12,20 +13,41 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 class PollingService {
 
   private MongoClient mongoClient;
   private String baseApiUrl = "http://155.138.235.83:5000/";
 
-  private final MongoCollection<Document> machineDataFromPollingAPICollection;
-  private static final String machineDataFromPollingAPIDatabaseName = "dev";
+  private final MongoCollection<Document> historicMachineDataFromPollingAPICollection;
+  private static final String historicMachineDataFromPollingAPIDatabaseName = "dev";
+
+  private final MongoCollection<Document> currentMachineDataFromPollingAPICollection;
+  private static final String currentMachineDataFromPollingAPIDatabaseName = "cur";
 
   PollingService(MongoClient mongoClient) {
     this.mongoClient = mongoClient;
-    MongoDatabase machineDataFromPollingAPIDatabase = mongoClient.getDatabase(machineDataFromPollingAPIDatabaseName);
-    machineDataFromPollingAPICollection = machineDataFromPollingAPIDatabase.getCollection("machineDataFromPollingAPI");
+    // Set up historic machine data
+    MongoDatabase historicMachineDataFromPollingAPIDatabase = mongoClient.getDatabase(historicMachineDataFromPollingAPIDatabaseName);
+    historicMachineDataFromPollingAPICollection = historicMachineDataFromPollingAPIDatabase.getCollection("historicMachineDataFromPollingAPI");
+
+    // Set up current machine data
+    MongoDatabase currentMachineDataFromPollingAPIDatabase = mongoClient.getDatabase(currentMachineDataFromPollingAPIDatabaseName);
+    currentMachineDataFromPollingAPICollection = currentMachineDataFromPollingAPIDatabase.getCollection("currentMachineDataFromPollingAPI");
+
     this.poll();
+
+    // HappyHedgehogs code base - threading for updated current machine database (modified to run in PollingService instead of Server.
+    final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    executorService.scheduleAtFixedRate(new Runnable() {
+      @Override
+      public void run() {
+        poll();
+      }
+    }, 0, 1, TimeUnit.MINUTES);
   }
 
   private void poll() {
@@ -62,6 +84,7 @@ class PollingService {
   }
 
   private void updateAllMachineData(String responseData) {
+    currentMachineDataFromPollingAPICollection.drop();
 
     BsonArray theArray = BsonArray.parse(responseData);
     Iterator<BsonValue> bsonValues = theArray.iterator();
@@ -75,9 +98,11 @@ class PollingService {
       for (Map.Entry<String, BsonValue> e : thisDocument.entrySet()) {
         d.append(e.getKey(), e.getValue());
       }
+
+      currentMachineDataFromPollingAPICollection.insertOne(d);
       //It would probably be better to use the timestamp of the database, but this might make it easier to index
       d.append("timestamp", "" + Time.nanoTime());
-      machineDataFromPollingAPICollection.insertOne(d);
+      historicMachineDataFromPollingAPICollection.insertOne(d);
     }
   }
 
