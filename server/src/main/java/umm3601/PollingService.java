@@ -39,18 +39,9 @@ class PollingService {
     currentMachineDataFromPollingAPICollection = currentMachineDataFromPollingAPIDatabase.getCollection("currentMachineDataFromPollingAPI");
 
     this.poll();
-
-    // HappyHedgehogs code base - threading for updated current machine database (modified to run in PollingService instead of Server.
-    final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    executorService.scheduleAtFixedRate(new Runnable() {
-      @Override
-      public void run() {
-        poll();
-      }
-    }, 0, 1, TimeUnit.MINUTES);
   }
 
-  private void poll() {
+  public void poll() {
     try {
       URL url = new URL(baseApiUrl + "machines");
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -99,10 +90,10 @@ class PollingService {
         d.append(e.getKey(), e.getValue());
       }
 
-      currentMachineDataFromPollingAPICollection.insertOne(d);
       //It would probably be better to use the timestamp of the database, but this might make it easier to index
       d.append("timestamp", "" + Time.nanoTime());
       historicMachineDataFromPollingAPICollection.insertOne(d);
+      currentMachineDataFromPollingAPICollection.insertOne(d);
     }
   }
 

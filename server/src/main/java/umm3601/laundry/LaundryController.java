@@ -33,7 +33,7 @@ public class LaundryController {
     machineCollection = machineDatabase.getCollection("machines");
     roomCollection = roomDatabase.getCollection("rooms");
     if (!seedLocalSource){
-      machinePollingCollection = machinePollingDatabase.getCollection("machineDataFromPollingAPI");
+      machinePollingCollection = machinePollingDatabase.getCollection("currentMachineDataFromPollingAPI");
     } else {
       machinePollingCollection = machineDatabase.getCollection("machines");
     }
@@ -78,7 +78,7 @@ public class LaundryController {
   private void updateMachines() {
 
     if (!seedLocalSource){
-      machinePollingCollection = pollingDatabase.getCollection("machineDataFromPollingAPI");
+      machinePollingCollection = pollingDatabase.getCollection("currentMachineDataFromPollingAPI");
     } else {
       machinePollingCollection = pollingDatabase.getCollection("machines");
     }

@@ -23,11 +23,11 @@ public class Server {
   // Historic Databases (not used yet)
   private static final String historicMachineDatabaseName = "dev";
   private static final String historicMachinePollingDatabaseName = "dev";
-  private static final String roomDatabaseName = "cur";
+  private static final String roomDatabaseName = "dev";
   // Up-to-date Databases (in use now)
   private static final String currentMachineDatabaseName = "cur";
   private static final String currentMachinePollingDatabaseName = "cur";
-  
+
   private static final int serverPort = 4567;
 
   public static void main(String[] args) {
@@ -49,6 +49,15 @@ public class Server {
     // pass in the constantly updating collection.
     LaundryController laundryController = new LaundryController(currentMachineDatabase, roomDatabase, currentMachinePollingDatabase);
     LaundryRequestHandler laundryRequestHandler = new LaundryRequestHandler(laundryController);
+
+    // HappyHedgehogs code base - threading for updated current machine database (modified to run in PollingService instead of Server.
+    final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    executorService.scheduleAtFixedRate(new Runnable() {
+      @Override
+      public void run() {
+        pollingService.poll();
+      }
+    }, 0, 1, TimeUnit.MINUTES);
 
     //Configure Spark
     port(serverPort);
