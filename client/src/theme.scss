@@ -6,12 +6,12 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 
-$light-primary: mat-palette($mat-grey, 500); // 500 is the base hue of a Material color
+$light-primary: mat-palette($mat-grey, 700); // 500 is the base hue of a Material color
 
  // The 200 here makes the indigo color lighter
  // Material Design dark themes should use a desaturated versions of primary and accent colors
  // See: https://material.io/design/color/dark-theme.html
-$dark-primary: mat-palette($mat-grey, 200);
+$dark-primary: mat-palette($mat-red, 200);
 
 $light-accent: mat-palette($mat-grey, A200);
 $dark-accent: mat-palette($mat-grey, A100);
@@ -25,3 +25,11 @@ $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
 
 // Create the theme object for a dark theme (a Sass map containing all of the palettes).
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.dark-theme {
+  @include angular-material-theme($dark-theme)
+}
+
+.light-theme {
+  @include angular-material-theme($light-theme)
+}

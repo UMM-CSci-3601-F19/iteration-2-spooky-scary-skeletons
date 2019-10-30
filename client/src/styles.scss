@@ -32,7 +32,7 @@
   // Define any styles affected by the theme.
 
   mat-sidenav-content {
-    background-color: #eeeeee;
+    //background-color: #eeeeee;
   }
 
   @if $is-dark {
@@ -41,9 +41,6 @@
       color: mat-color($foreground, text);
     }
 
-    mat-sidenav-content {
-      background-color: #b0bec5;
-    }
   }
   .drawer-list-item-active {
     background-color: mat-color($background, hover) !important;
@@ -89,7 +86,8 @@ html {
 .indicator {
   font-size: 14px;
   margin-left: 35px;
-  color: #7f7f7f;
+  color: darkgrey;
+
 }
 
 .roomName {
