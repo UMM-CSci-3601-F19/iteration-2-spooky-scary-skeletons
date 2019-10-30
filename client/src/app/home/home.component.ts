@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgModule} from '@angular/core';
 import {Room} from './room';
 import {Machine} from './machine';
 import {Observable} from 'rxjs';

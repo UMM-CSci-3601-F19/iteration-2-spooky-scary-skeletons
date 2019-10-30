@@ -29,6 +29,9 @@
       </button>
       <img class="logo" id="logo" src="https://i.imgur.com/KwiKNmo.png" alt="U of M Morris logo" width="70px">
       <span class="app-title" id="app-title">UMM Laundry Service</span>
+      <button mat-raised-button color="primary" (click)="onSetTheme('dark-theme')">Dark</button>
+      <button mat-raised-button color="accent" (click)="onSetTheme('light-theme')">Light</button>
+
     </mat-toolbar>
     <div class="main-content mat-typography">
       <router-outlet></router-outlet>
