@@ -6,14 +6,14 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 
-$light-primary: mat-palette($mat-grey, 500); // 500 is the base hue of a Material color
+$light-primary: mat-palette($mat-grey, 400); // 500 is the base hue of a Material color
 
  // The 200 here makes the indigo color lighter
  // Material Design dark themes should use a desaturated versions of primary and accent colors
  // See: https://material.io/design/color/dark-theme.html
 $dark-primary: mat-palette($mat-grey, 800);
 
-$light-accent: mat-palette($mat-grey, 600);
+$light-accent: mat-palette($mat-grey, 500);
 $dark-accent: mat-palette($mat-grey, A100);
 
 // The warn palette is optional (defaults to red).

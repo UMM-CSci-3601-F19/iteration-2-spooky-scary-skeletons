@@ -31,9 +31,10 @@
 
   // Define any styles affected by the theme.
 
-  //mat-sidenav-content {
-  //  //background-color: #eeeeee;
-  //}
+  .mat-sidenav-content {
+    background-color: mat-color($accent);
+  }
+
 
   @if $is-dark {
     .mat-toolbar.mat-primary {
@@ -57,17 +58,19 @@
     }
   }
   .indicator{
-    color: mat-color($accent);
+    color: mat-color($primary) !important;
+    font-size: 14px;
+    margin-left: 35px;
   }
 }
 
+@media (prefers-color-scheme: light) {
+  // Sets up the theming for built in material components with the light theme
+  @include angular-material-theme($light-theme);
 
-// Sets up the theming for built in material components with the light theme
-@include angular-material-theme($light-theme);
-
-// Sets up theming for our custom components with the light theme
-@include app-theming($light-theme);
-
+  // Sets up theming for our custom components with the light theme
+  @include app-theming($light-theme);
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -84,12 +87,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html {
   scroll-behavior: smooth;
-}
-
-.indicator {
-  font-size: 14px;
-  margin-left: 35px;
-
 }
 
 .roomName {
