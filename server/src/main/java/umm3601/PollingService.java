@@ -58,8 +58,8 @@ class PollingService {
           String item = sc.nextLine();
           inline += item;
         }
-        System.out.println("\nJSON data in string format");
-        System.out.println(inline);
+        //System.out.println("\nJSON data in string format");
+        //System.out.println(inline);
         sc.close();
         //use that string to update machine data
         updateAllMachineData(inline);
@@ -79,11 +79,11 @@ class PollingService {
 
     BsonArray theArray = BsonArray.parse(responseData);
     Iterator<BsonValue> bsonValues = theArray.iterator();
-    System.out.println("THE ARRAY OF DATA IS THIS MANY ITEMS:" + theArray.size());
+    //System.out.println("THE ARRAY OF DATA IS THIS MANY ITEMS:" + theArray.size());
 
     while (bsonValues.hasNext()) {
       BsonDocument thisDocument = bsonValues.next().asDocument();
-      System.out.println(thisDocument);
+      //System.out.println(thisDocument);
 
       Document d = new Document();
       for (Map.Entry<String, BsonValue> e : thisDocument.entrySet()) {

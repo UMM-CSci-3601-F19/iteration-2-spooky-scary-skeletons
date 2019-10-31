@@ -23,7 +23,7 @@ public class Server {
   // Historic Databases (not used yet)
   private static final String historicMachineDatabaseName = "dev";
   private static final String historicMachinePollingDatabaseName = "dev";
-  private static final String roomDatabaseName = "dev";
+  private static final String roomDatabaseName = "cur";
   // Up-to-date Databases (in use now)
   private static final String currentMachineDatabaseName = "cur";
   private static final String currentMachinePollingDatabaseName = "cur";

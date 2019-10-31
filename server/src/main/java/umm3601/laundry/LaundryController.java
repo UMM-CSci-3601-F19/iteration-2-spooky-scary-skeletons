@@ -40,7 +40,9 @@ public class LaundryController {
     this.updateMachines();
   }
 
-  public String getRooms() { return serializeIterable(roomCollection.find()); }
+  public String getRooms() {
+    return serializeIterable(roomCollection.find());
+  }
 
   public String getMachines() {
     this.updateMachines();
