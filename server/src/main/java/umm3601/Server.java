@@ -23,7 +23,7 @@ public class Server {
   // Historic Databases (not used yet)
   private static final String historicMachineDatabaseName = "dev";
   private static final String historicMachinePollingDatabaseName = "dev";
-  private static final String roomDatabaseName = "cur";
+  private static final String roomDatabaseName = "dev";
   // Up-to-date Databases (in use now)
   private static final String currentMachineDatabaseName = "cur";
   private static final String currentMachinePollingDatabaseName = "cur";
@@ -34,14 +34,14 @@ public class Server {
 
     MongoClient mongoClient = new MongoClient();
     MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
+    // rooms
+    MongoDatabase roomDatabase = mongoClient.getDatabase(roomDatabaseName);
     // historic data
     MongoDatabase historicMachineDatabase = mongoClient.getDatabase(historicMachineDatabaseName);
     MongoDatabase historicMachinePollingDatabase = mongoClient.getDatabase(historicMachinePollingDatabaseName);
     // current data
     MongoDatabase currentMachineDatabase = mongoClient.getDatabase(currentMachineDatabaseName);
     MongoDatabase currentMachinePollingDatabase = mongoClient.getDatabase(currentMachinePollingDatabaseName);
-    // rooms
-    MongoDatabase roomDatabase = mongoClient.getDatabase(roomDatabaseName);
 
     PollingService pollingService = new PollingService(mongoClient);
     UserController userController = new UserController(userDatabase);
