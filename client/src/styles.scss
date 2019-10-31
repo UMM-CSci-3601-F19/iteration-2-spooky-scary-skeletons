@@ -31,9 +31,9 @@
 
   // Define any styles affected by the theme.
 
-  mat-sidenav-content {
-    //background-color: #eeeeee;
-  }
+  //mat-sidenav-content {
+  //  //background-color: #eeeeee;
+  //}
 
   @if $is-dark {
     .mat-toolbar.mat-primary {
@@ -44,7 +44,7 @@
   }
   .drawer-list-item-active {
     background-color: mat-color($background, hover) !important;
-    color: mat-color($primary) !important;
+    color: mat-color($accent) !important;
     .mat-list-icon {
       color: mat-color($primary) !important;
     }
@@ -55,6 +55,9 @@
       color: mat-color($foreground, icon);
       margin-right: 16px;
     }
+  }
+  .indicator{
+    color: mat-color($accent);
   }
 }
 
@@ -86,7 +89,6 @@ html {
 .indicator {
   font-size: 14px;
   margin-left: 35px;
-  color: darkgrey;
 
 }
 
@@ -130,4 +132,5 @@ mat-icon {
 
 .menuLabel.mat-icon.notranslate.material-icons.mat-icon-no-color{
   margin-left: 9px;
+  color: white;
 }
