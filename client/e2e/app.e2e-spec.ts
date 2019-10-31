@@ -13,6 +13,6 @@ describe('angular-spark-lab', () => {
 
   it('should get and highlight Home title attribute ', () => {
     page.navigateTo();
-    expect(page.getPageTitle()).toEqual('Umm Laundry Service');
+    expect(page.getPageTitle()).toEqual('UMM Laundry Service');
   });
 });
