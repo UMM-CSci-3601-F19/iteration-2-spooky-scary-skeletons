@@ -16,7 +16,7 @@ public class LaundryController {
   private MongoCollection<Document> machineCollection;
 
   private  MongoCollection<Document> machinePollingCollection;
-  private MongoDatabase pullingDatabase;
+  private MongoDatabase pollingDatabase;
 
   /*
    * This is a switch for the E2E test
@@ -29,18 +29,20 @@ public class LaundryController {
   private boolean seedLocalSource = false;
 
   public LaundryController(MongoDatabase machineDatabase, MongoDatabase roomDatabase, MongoDatabase machinePollingDatabase)  {
-    this.pullingDatabase = machinePollingDatabase;
+    this.pollingDatabase = machinePollingDatabase;
     machineCollection = machineDatabase.getCollection("machines");
     roomCollection = roomDatabase.getCollection("rooms");
     if (!seedLocalSource){
-      machinePollingCollection = machinePollingDatabase.getCollection("machineDataFromPollingAPI");
+      machinePollingCollection = machinePollingDatabase.getCollection("currentMachineDataFromPollingAPI");
     } else {
       machinePollingCollection = machineDatabase.getCollection("machines");
     }
     this.updateMachines();
   }
 
-  public String getRooms() { return serializeIterable(roomCollection.find()); }
+  public String getRooms() {
+    return serializeIterable(roomCollection.find());
+  }
 
   public String getMachines() {
     this.updateMachines();
@@ -78,9 +80,9 @@ public class LaundryController {
   private void updateMachines() {
 
     if (!seedLocalSource){
-      machinePollingCollection = pullingDatabase.getCollection("machineDataFromPollingAPI");
+      machinePollingCollection = pollingDatabase.getCollection("currentMachineDataFromPollingAPI");
     } else {
-      machinePollingCollection = pullingDatabase.getCollection("machines");
+      machinePollingCollection = pollingDatabase.getCollection("machines");
     }
 
     long currentTime = System.currentTimeMillis();

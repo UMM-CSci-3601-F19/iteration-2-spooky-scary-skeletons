@@ -1,26 +1,26 @@
 evaluationDependsOn ":client"
 evaluationDependsOn ":server"
 
-// Assumes our dev database is named "historical"
+// Assumes our dev database is named "dev"
 task clearMongoDB(type: Exec) {
   group = "application"
   executable "mongo"
-  args = ["historical", "--eval", "printjson(db.dropDatabase())"]
+  args = ["dev", "--eval", "printjson(db.dropDatabase())"]
 }
 
 task seedUserData(type: Exec) {
   executable = "mongoimport"
-  args = ["-d", "historical", "-c", "users", "--file", "users.seed.json", "--jsonArray"]
+  args = ["-d", "dev", "-c", "users", "--file", "users.seed.json", "--jsonArray"]
 }
 
 task seedRoomData(type: Exec) {
   executable = "mongoimport"
-  args = ["-d", "historical", "-c", "rooms", "--file", "rooms.seed.json", "--jsonArray"]
+  args = ["-d", "dev", "-c", "rooms", "--file", "rooms.seed.json", "--jsonArray"]
 }
 
 task seedMachineData(type: Exec) {
   executable = "mongoimport"
-  args = ["-d", "historical", "-c", "machines", "--file", "machines.seed.json", "--jsonArray"]
+  args = ["-d", "dev", "-c", "machines", "--file", "machines.seed.json", "--jsonArray"]
 }
 
 task seedMongoDB {
