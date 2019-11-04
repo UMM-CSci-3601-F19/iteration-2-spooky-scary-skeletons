@@ -1,6 +1,37 @@
 @import '../node_modules/@angular/material/theming';
 @include mat-core();
-
+$morris-maroon: (
+  50 : #efe0e3,
+  100 : #d7b3ba,
+  200 : #bd808c,
+  300 : #a24d5e,
+  400 : #8e263c,
+  500 : #7a0019,
+  600 : #720016,
+  700 : #670012,
+  800 : #5d000e,
+  900 : #4a0008,
+  A100 : #ff7e82,
+  A200 : #ff4b51,
+  A400 : #ff1820,
+  A700 : #fd0009,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -17,8 +48,8 @@ $light-accent: mat-palette($mat-grey, 500);
 $dark-accent: mat-palette($mat-grey, A100);
 
 // The warn palette is optional (defaults to red).
-$light-warn: mat-palette($mat-red); // Without a hue given, it defaults to 500
-$dark-warn: mat-palette($mat-red, 300);
+$light-warn: mat-palette($morris-maroon, 500); // Without a hue given, it defaults to 500
+$dark-warn: mat-palette($morris-maroon, 800);
 
 // Create the theme object for a light theme (a Sass map containing all of the palettes).
 $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
@@ -33,3 +64,7 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .light-theme {
   @include angular-material-theme($light-theme)
 }
+
+
+
+
