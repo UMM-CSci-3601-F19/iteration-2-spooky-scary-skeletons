@@ -44,7 +44,7 @@
             <mat-expansion-panel #elem class="washers" [id]="machine.id"  *ngIf="machine.status==='normal' && machine.type==='washer' && machine.running==false">
               <mat-expansion-panel-header>
                 <div class="visualBox"> </div>
-                <mat-panel-title matTooltip="Running: {{machine.running}}" style="color:green">
+                <mat-panel-title matTooltip="Running: {{machine.running}}" style="color:#3FB63F">
                   <mat-icon>local_laundry_service</mat-icon>
                   This {{machine.type}} has been vacant for {{machine.vacantTime}} minutes.
                 </mat-panel-title>
@@ -52,7 +52,7 @@
               <mat-panel-description>Status: {{machine.status}}</mat-panel-description>
               <mat-panel-description>Room: {{machine.room_id}}</mat-panel-description>
               <mat-panel-description>Running: {{machine.running}}</mat-panel-description>
-              <mat-panel-description>ID: {{machine.id}}</mat-panel-description>
+              <mat-panel-description>Name: {{machine.name}}</mat-panel-description>
             </mat-expansion-panel>
 <!--            </ng-container>-->
           </mat-accordion>
@@ -72,7 +72,7 @@
               <mat-panel-description>Status: {{machine.status}}</mat-panel-description>
               <mat-panel-description>Room: {{machine.room_id}}</mat-panel-description>
               <mat-panel-description>Running: {{machine.running}}</mat-panel-description>
-              <mat-panel-description><div [id]="machine.id">ID: {{machine.id}}</div></mat-panel-description>
+              <mat-panel-description><div [id]="machine.id">Name: {{machine.name}}</div></mat-panel-description>
             </mat-expansion-panel>
 <!--            </ng-container>-->
           </mat-accordion>
@@ -88,7 +88,7 @@
             <mat-expansion-panel #elem class="dryers" *ngIf="machine.status==='normal' && machine.type==='dryer' && machine.running == false">
               <mat-expansion-panel-header>
                 <div class="visualBox"> </div>
-                <mat-panel-title matTooltip="Running: {{machine.running}}" style="color:green">
+                <mat-panel-title matTooltip="Running: {{machine.running}}" style="color:#3FB63F">
                   <mat-icon>fireplace</mat-icon>
                   This {{machine.type}} has been vacant for {{machine.vacantTime}} minutes.
                 </mat-panel-title>
