@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   public numOfBroken: number;
   public numOfWashers: number;
   public numOfDryers: number;
+  public roomLayout: string;
 
   public roomId: string;
   public roomName: string;
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
   constructor(public homeService: HomeService) {
     this.machineListTitle = 'available within all rooms';
     this.brokenMachineListTitle = 'Unavailable machines within all rooms';
+    this.roomLayout = 'none';
   }
 
   setSelector(state: number) {
@@ -48,8 +50,17 @@ export class HomeComponent implements OnInit {
     this.roomName = newName;
     this.machineListTitle = 'available within ' + this.roomName;
     this.brokenMachineListTitle = 'Unavailable machines within ' + this.roomName;
+    this.updateLayout();
     this.updateMachines();
     this.setSelector(1);
+  }
+
+  private updateLayout(): void {
+    if (this.roomId == null || this.roomId === '') {
+      this.roomLayout = 'none';
+    } else {
+      this.roomLayout = this.roomId + '.html';
+    }
   }
 
   private updateMachines(): void {
