@@ -36,7 +36,7 @@ describe('Home page', () => {
         status: 'normal',
         room_id: 'room_a',
         type: 'washer',
-
+        name: 'cool_washer',
         remainingTime: -1,
         vacantTime: 10,
       }, {
@@ -45,7 +45,7 @@ describe('Home page', () => {
         status: 'normal',
         room_id: 'room_b',
         type: 'dryer',
-
+        name: 'cool_dryer',
         remainingTime: 10,
         vacantTime: -1,
       }]),
