@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {OverlayModule} from "@angular/cdk/overlay";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 // import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 // import {CdkStepperModule} from '@angular/cdk/stepper';
@@ -34,7 +35,8 @@ import {OverlayModule} from "@angular/cdk/overlay";
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    OverlayModule
+    OverlayModule,
+    MatSlideToggleModule,
     // ScrollDispatchModule,
     // CdkStepperModule,
   ],
