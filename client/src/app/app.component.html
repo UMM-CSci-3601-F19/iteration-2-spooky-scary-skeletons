@@ -1,7 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
     mode="over">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>Menu
+      <div class="btn-toolbar" >
+      <button class="themes" mat-mini-fab color="primary" (click)="onSetTheme('dark-theme')"><mat-icon class="theme-button">nights_stay</mat-icon></button>
+      <button class="themes" mat-mini-fab color="accent" (click)="onSetTheme('light-theme')"><mat-icon class="theme-button">wb_sunny</mat-icon></button>
+      </div>
+    </mat-toolbar>
+
     <mat-nav-list class="sidenav-list">
 
       <mat-list-item routerLink="/" routerLinkActive="drawer-list-item-active" #routerLinkActiveInstance="routerLinkActive"
@@ -31,8 +37,7 @@
       <img class="logo" id="logo" src="https://i.imgur.com/KwiKNmo.png" alt="U of M Morris logo" width="50px">
       <span class="app-title" id="app-title">UMM Laundry Service</span>
 
-      <button class="themes" mat-mini-fab color="primary" (click)="onSetTheme('dark-theme')"><mat-icon class="theme-button">nights_stay</mat-icon></button>
-      <button class="themes" mat-mini-fab color="accent" (click)="onSetTheme('light-theme')"><mat-icon class="theme-button">wb_sunny</mat-icon></button>
+
 
     </mat-toolbar>
     <div class="main-content mat-typography">
