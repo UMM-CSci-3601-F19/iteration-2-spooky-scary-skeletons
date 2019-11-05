@@ -96,7 +96,7 @@
               <mat-panel-description>Status: {{machine.status}}</mat-panel-description>
               <mat-panel-description>Room: {{machine.room_id}}</mat-panel-description>
               <mat-panel-description>Running: {{machine.running}}</mat-panel-description>
-              <mat-panel-description><div [id]="machine.id">ID: {{machine.id}}</div></mat-panel-description>
+              <mat-panel-description><div [id]="machine.id">Name: {{machine.name}}</div></mat-panel-description>
             </mat-expansion-panel>
           </mat-accordion>
         </mat-accordion>
@@ -114,7 +114,7 @@
               <mat-panel-description>Status: {{machine.status}}</mat-panel-description>
               <mat-panel-description>Room: {{machine.room_id}}</mat-panel-description>
               <mat-panel-description>Running: {{machine.running}}</mat-panel-description>
-              <mat-panel-description><div [id]="machine.id">ID: {{machine.id}}</div></mat-panel-description>
+              <mat-panel-description><div [id]="machine.id">Name: {{machine.name}}</div></mat-panel-description>
             </mat-expansion-panel>
           </mat-accordion>
         </mat-accordion>
@@ -129,9 +129,9 @@
             <mat-expansion-panel #elem class="brokens" *ngIf="machine.status==='broken' && machine.type==='washer'">
               <mat-expansion-panel-header>
                 <div class="visualBox"> </div>
-                <mat-panel-title matTooltip="Running: {{machine.running}}" style="font-style: italic; color: gray">
+                <mat-panel-title matTooltip="Running: {{machine.running}}" style="font-style: italic; color: #cc0000">
                   <mat-icon>local_laundry_service</mat-icon>
-                  {{machine.type}}</mat-panel-title>
+                  Washer {{machine.name}} is unavailable</mat-panel-title>
               </mat-expansion-panel-header>
 
               <mat-panel-description>Status: {{machine.status}}</mat-panel-description>
@@ -147,9 +147,9 @@
             <mat-expansion-panel #elem class="brokens" *ngIf="machine.status==='broken' && machine.type==='dryer'">
               <mat-expansion-panel-header>
                 <div class="visualBox"> </div>
-                <mat-panel-title matTooltip="Running: {{machine.running}}" style="font-style: italic; color: gray">
+                <mat-panel-title matTooltip="Running: {{machine.running}}" style="font-style: italic; color: #cc0000">
                   <mat-icon>fireplace</mat-icon>
-                  {{machine.type}}</mat-panel-title>
+                  Dryer {{machine.name}} is unavailable</mat-panel-title>
               </mat-expansion-panel-header>
 
               <mat-panel-description>Status: {{machine.status}}</mat-panel-description>
