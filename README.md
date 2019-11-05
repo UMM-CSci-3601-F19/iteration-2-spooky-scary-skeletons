@@ -1,6 +1,7 @@
 # The Web App
 ### CSCI 3601 F19 Iteration 1
 ##### Authors: Michael Fairbanks, Kai Zang, Tyler Rowland, and Waller Li
+with edits by Robert Beane
 
 [![Build Status](https://travis-ci.org/UMM-CSci-3601-F19/iteration-1-rambunctious-racoons.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-F19/iteration-1-rambunctious-racoons)
 
