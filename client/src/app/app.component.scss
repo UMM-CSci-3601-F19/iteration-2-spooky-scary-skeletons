@@ -14,20 +14,19 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  //background: #7a0019;
 }
 
 .app-title.logo{
   display: flex;
 }
 .app-title {
-  //padding-left: 20px;
   color: white;
-  //padding-right: 200px;
+  padding-left: 10px;
 }
 
 .logo{
-  //padding-left: 30px;
+  margin: 5px 0px 5px 0px;
+  padding-left: 10px;
 }
 
 .main-content {
