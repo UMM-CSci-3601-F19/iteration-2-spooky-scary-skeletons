@@ -37,19 +37,21 @@ $morris-maroon: (
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 
-$light-primary: mat-palette($mat-grey, 300, 500, 100); // 500 is the base hue of a Material color
+//$light-primary: mat-palette($mat-grey, 300, 500, 100); // 500 is the base hue of a Material color
+$light-primary: mat-palette($morris-maroon, 500);
 
  // The 200 here makes the indigo color lighter
  // Material Design dark themes should use a desaturated versions of primary and accent colors
  // See: https://material.io/design/color/dark-theme.html
-$dark-primary: mat-palette($mat-grey, 800, 700, 900);
+//$dark-primary: mat-palette($mat-grey, 800, 700, 900);
+$dark-primary: mat-palette($morris-maroon, 800);
 
-$light-accent: mat-palette($mat-grey, 500);
+$light-accent: mat-palette($mat-grey, 600);
 $dark-accent: mat-palette($mat-grey, A100);
 
 // The warn palette is optional (defaults to red).
-$light-warn: mat-palette($morris-maroon, 500); // Without a hue given, it defaults to 500
-$dark-warn: mat-palette($morris-maroon, 800);
+$light-warn: mat-palette($mat-grey, 800); // Without a hue given, it defaults to 500
+$dark-warn: mat-palette($mat-grey, 300);
 
 // Create the theme object for a light theme (a Sass map containing all of the palettes).
 $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
