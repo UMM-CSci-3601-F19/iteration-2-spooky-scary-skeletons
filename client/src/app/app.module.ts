@@ -7,6 +7,7 @@ import {HomeComponent} from './home/home.component';
 import {UserListComponent} from './users/user-list.component';
 import {UserListService} from './users/user-list.service';
 import {HomeService} from './home/home.service';
+import {AdminComponent} from "./admin/admin.component";
 import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 
@@ -44,7 +45,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     AppComponent,
     HomeComponent,
     UserListComponent,
-    AddUserComponent
+    AddUserComponent,
+    AdminComponent
   ],
   providers: [
     HttpClient,
