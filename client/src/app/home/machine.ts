@@ -4,7 +4,7 @@ export interface Machine {
   status: string;
   room_id: string;
   type: string;
-
+  name: string;
   remainingTime: number;
   vacantTime: number;
 }

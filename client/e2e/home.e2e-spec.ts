@@ -41,9 +41,9 @@ describe('home', () => {
     expect(page.getIndependenceHallTitleInHomePanel()).toEqual('Independence Hall');
     expect(page.getBlakelyHallTitleInHomePanel()).toEqual('Blakely Hall');
     expect(page.getSpoonerHallTitleInHomePanel()).toEqual('Spooner Hall');
-    expect(page.getGreenPrairieHallTitleInHomePanel()).toEqual('Green Prarie');
+    expect(page.getGreenPrairieHallTitleInHomePanel()).toEqual('Green Prairie');
     expect(page.getPineHallTitleInHomePanel()).toEqual('Pine Hall');
-    expect(page.getApartmentHallTitleInHomePanel()).toEqual('The Appartments');
+    expect(page.getApartmentHallTitleInHomePanel()).toEqual('The Apartments');
   });
 
   it('should get and highlight each hall availability attribute', () => {

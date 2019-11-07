@@ -16,8 +16,17 @@
   z-index: 1;
 }
 
+.app-title.logo{
+  display: flex;
+}
 .app-title {
-  padding-left: 20px;
+  color: white;
+  padding-left: 10px;
+}
+
+.logo{
+  margin: 5px 0px 5px 0px;
+  padding-left: 10px;
 }
 
 .main-content {
@@ -25,4 +34,12 @@
   @media (max-width: 599px) {
     margin: 16px;
   }
+}
+.theme-button {
+padding-left: 8px;
+}
+
+.themes{
+  margin: 0px 10px 0px 30px;
+
 }
