@@ -35,7 +35,7 @@
 
   @if $is-dark {
     .mat-toolbar.mat-primary {
-      background: mat-color($background, app-bar);
+      background: mat-color($primary, app-bar);
       color: mat-color($foreground, text);
     }
 
@@ -50,7 +50,7 @@
 
   .sidenav-list {
     .mat-list-icon {
-      color: mat-color($foreground, icon);
+      color: mat-color($accent, icon);
       margin-right: 16px;
     }
   }
