@@ -14,7 +14,7 @@ describe('Home list Service', () => {
       status: 'normal',
       room_id: 'room_a',
       type: 'washer',
-
+      name: 'washer_a',
       remainingTime: null,
       vacantTime: null,
     },
@@ -24,7 +24,7 @@ describe('Home list Service', () => {
       status: 'normal',
       room_id: 'room_a',
       type: 'dryer',
-
+      name: 'dryer_a',
       remainingTime: null,
       vacantTime: null,
     },
@@ -34,7 +34,7 @@ describe('Home list Service', () => {
       status: 'broken',
       room_id: 'room_b',
       type: 'washer',
-
+      name: 'washer_b',
       remainingTime: null,
       vacantTime: null,
     }
@@ -138,7 +138,7 @@ describe('Home list Service', () => {
         status: 'normal',
         room_id: 'room_a',
         type: 'washer',
-
+        name: 'washer_a',
         remainingTime: 100,
         vacantTime: -1,
       },
@@ -148,7 +148,7 @@ describe('Home list Service', () => {
         status: 'normal',
         room_id: 'room_a',
         type: 'dryer',
-
+        name: 'dryer_a',
         remainingTime: -1,
         vacantTime: 10,
       },
@@ -158,7 +158,7 @@ describe('Home list Service', () => {
         status: 'broken',
         room_id: 'room_b',
         type: 'washer',
-
+        name: 'washer_b',
         remainingTime: 34,
         vacantTime: -1,
       }

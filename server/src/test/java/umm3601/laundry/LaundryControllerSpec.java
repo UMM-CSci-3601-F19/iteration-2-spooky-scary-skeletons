@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
+// Written by rambunctious-raccoons, modified by Emma Oswood
+// Currently, is only testing the "currentMachineDatabase" and not the "historicMachineDatabase"
 public class LaundryControllerSpec {
 
   private LaundryController laundryController;
@@ -55,7 +57,7 @@ public class LaundryControllerSpec {
       "  }"));
     machineDocuments.insertMany(testMachines);
 
-    machinePollingDocuments = machinePollingDB.getCollection("machineDataFromPollingAPI");
+    machinePollingDocuments = machinePollingDB.getCollection("currentMachineDataFromPollingAPI");
     machinePollingDocuments.drop();
     List<Document> testPollingMachines = new ArrayList<>();
     testPollingMachines.add(Document.parse("{\n" +

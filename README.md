@@ -1,4 +1,4 @@
-# The Web App
+# UMM LaundryServ
 ### CSCI 3601 F19 Iteration 2
 ##### Authors: Michael Fairbanks, Robert Beane, David Escudero, Emma Oswood
 

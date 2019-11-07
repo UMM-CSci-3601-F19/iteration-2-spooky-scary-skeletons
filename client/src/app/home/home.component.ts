@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgModule} from '@angular/core';
 import {Room} from './room';
 import {Machine} from './machine';
 import {Observable} from 'rxjs';
@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   public numOfBroken: number;
   public numOfWashers: number;
   public numOfDryers: number;
+  private highlightedID: string = '';
 
   public roomId: string;
   public roomName: string;
@@ -48,6 +49,10 @@ export class HomeComponent implements OnInit {
 
   setSelector(state: number) {
     this.selectorState = state;
+  }
+
+  isHighlighted(machine: Machine): boolean {
+    return machine.id['$oid'] === this.highlightedID;
   }
 
   public updateRoom(newId: string, newName: string): void {

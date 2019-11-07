@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, HostBinding} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(public overlayContainer: OverlayContainer) {}
+
+  @HostBinding('class') componentCssClass;
+
+  onSetTheme(theme) {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+    this.componentCssClass = theme;
+  }
 
 }

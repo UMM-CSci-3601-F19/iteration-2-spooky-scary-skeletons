@@ -1,7 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
     mode="over">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>Menu
+      <div class="btn-toolbar" >
+      <button class="themes" mat-mini-fab color="warn" (click)="onSetTheme('dark-theme')"><mat-icon class="theme-button">nights_stay</mat-icon></button>
+      <button class="themes" mat-mini-fab color="accent" (click)="onSetTheme('light-theme')"><mat-icon class="theme-button">wb_sunny</mat-icon></button>
+      </div>
+    </mat-toolbar>
+
     <mat-nav-list class="sidenav-list">
 
       <mat-list-item routerLink="/" routerLinkActive="drawer-list-item-active" #routerLinkActiveInstance="routerLinkActive"
@@ -11,10 +17,10 @@
         Home
       </mat-list-item>
 
-      <mat-list-item href="#" routerLink="/users" routerLinkActive="drawer-list-item-active" (click)="drawer.close()">
-        <mat-icon matListIcon>people</mat-icon>
-        Users
-      </mat-list-item>
+<!--      <mat-list-item href="#" routerLink="/users" routerLinkActive="drawer-list-item-active" (click)="drawer.close()">-->
+<!--        <mat-icon matListIcon>people</mat-icon>-->
+<!--        Users-->
+<!--      </mat-list-item>-->
 
       <mat-list-item href="#" routerLink="/admin" routerLinkActive="drawer-list-item-active" (click)="drawer.close()">
         <mat-icon matListIcon>sentiment_very_dissatisfied</mat-icon>
@@ -26,13 +32,16 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
+        color="accent"
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon" class="menuLabel">menu</mat-icon>
       </button>
-      <span class="app-title" id="app-title">THE WEB APP</span>
+      <img class="logo" id="logo" src="https://i.imgur.com/KwiKNmo.png" alt="U of M Morris logo" width="50px">
+      <span class="app-title" id="app-title" style="font-family: 'Source Serif Pro', serif;font-size: xx-large">
+        UMM L<span style="font-size: x-large">AUNDRY</span>S<span style="font-size: x-large">ERV</span></span>
     </mat-toolbar>
     <div class="main-content mat-typography">
       <router-outlet></router-outlet>
