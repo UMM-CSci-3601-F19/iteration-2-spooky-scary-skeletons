@@ -3,6 +3,9 @@ import {Room} from './room';
 import {Machine} from './machine';
 import {Observable} from 'rxjs';
 import {HomeService} from './home.service';
+import {AuthService} from "../auth.service";
+
+declare let gapi: any;
 
 @Component({
   templateUrl: 'home.component.html',
@@ -34,6 +37,10 @@ export class HomeComponent implements OnInit {
   public roomId: string;
   public roomName: string;
   public selectorState: number;
+
+  public auth: AuthService;
+  public text: string;
+  public buttonSource1: string;
 
   constructor(public homeService: HomeService) {
     this.machineListTitle = 'available within all rooms';
@@ -95,6 +102,10 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  initGapi(): void {
+    this.auth.loadClient();
+  }
+
   ngOnInit(): void {
     (async () => {
       this.setSelector(0);
@@ -107,6 +118,7 @@ export class HomeComponent implements OnInit {
       this.homeService.updateAvailableMachineNumber(this.rooms, this.machines);
       this.updateTime();
     }) ();
+    this.initGapi();
   }
 
   updateTime(): void {

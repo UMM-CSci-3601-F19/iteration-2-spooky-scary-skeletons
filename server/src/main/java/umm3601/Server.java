@@ -10,7 +10,6 @@ import umm3601.laundry.LaundryController;
 import umm3601.laundry.LaundryRequestHandler;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
-
 import static spark.Spark.*;
 import java.io.InputStream;
 import java.util.concurrent.Executors;

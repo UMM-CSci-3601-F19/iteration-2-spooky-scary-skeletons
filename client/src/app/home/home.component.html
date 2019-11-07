@@ -1,11 +1,9 @@
 <div layout-gt-sm="row" class="home">
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-expansion-panel [expanded]="selectorState === 0" (opened)="setSelector(0)">
-
       <mat-expansion-panel-header>
         <mat-panel-title id="home-rooms-card">Please select a laundry room here</mat-panel-title>
       </mat-expansion-panel-header>
-
       <mat-panel-description style="font-weight: 400;">
         <mat-card class="room">
           <mat-accordion *ngIf="rooms; else roomsError">
@@ -118,6 +116,14 @@
             </mat-expansion-panel>
           </mat-accordion>
         </mat-accordion>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title id="admin-thing" style="font-weight: unset; padding-left: 8px; font-size: 15px">
+          Admin page
+        </mat-card-title>
+        <div id="signIn" class="g-signin2" data-onsuccess="onSignIn" (click)="auth.signIn()"></div>
+        <div id="signOut" class="g-signout2" data-onsuccess="onSignOut" (click)="auth.signOut()"></div>
       </mat-card>
 
       <mat-card>
