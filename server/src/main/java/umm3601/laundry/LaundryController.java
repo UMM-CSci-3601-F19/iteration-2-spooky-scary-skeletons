@@ -16,31 +16,33 @@ public class LaundryController {
   private MongoCollection<Document> machineCollection;
 
   private  MongoCollection<Document> machinePollingCollection;
-  private MongoDatabase pullingDatabase;
+  private MongoDatabase pollingDatabase;
 
   /*
    * This is a switch for the E2E test
    * before running the tests
-   * set seedlocalSourse to be true,
+   * set seedLocalSource to be true,
    * after testing, set the boolean
    * back to true in order to make
-   * the functionailty works.
+   * the functionality works.
    */
-  private boolean seedLocalSourse = false;
+  private boolean seedLocalSource = false;
 
   public LaundryController(MongoDatabase machineDatabase, MongoDatabase roomDatabase, MongoDatabase machinePollingDatabase)  {
-    this.pullingDatabase = machinePollingDatabase;
+    this.pollingDatabase = machinePollingDatabase;
     machineCollection = machineDatabase.getCollection("machines");
     roomCollection = roomDatabase.getCollection("rooms");
-    if (!seedLocalSourse){
-      machinePollingCollection = machinePollingDatabase.getCollection("machineDataFromPollingAPI");
+    if (!seedLocalSource){
+      machinePollingCollection = machinePollingDatabase.getCollection("currentMachineDataFromPollingAPI");
     } else {
       machinePollingCollection = machineDatabase.getCollection("machines");
     }
     this.updateMachines();
   }
 
-  public String getRooms() { return serializeIterable(roomCollection.find()); }
+  public String getRooms() {
+    return serializeIterable(roomCollection.find());
+  }
 
   public String getMachines() {
     this.updateMachines();
@@ -77,10 +79,10 @@ public class LaundryController {
 
   private void updateMachines() {
 
-    if (!seedLocalSourse){
-      machinePollingCollection = pullingDatabase.getCollection("machineDataFromPollingAPI");
+    if (!seedLocalSource){
+      machinePollingCollection = pollingDatabase.getCollection("currentMachineDataFromPollingAPI");
     } else {
-      machinePollingCollection = pullingDatabase.getCollection("machines");
+      machinePollingCollection = pollingDatabase.getCollection("machines");
     }
 
     long currentTime = System.currentTimeMillis();
