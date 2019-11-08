@@ -1,6 +1,14 @@
 import {browser, element, by, promise, ElementFinder} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
+// Google OAuth Testing:
+// https://github.com/UMM-CSci-3601-S19/iteration-4-endgame/blob/master/Documentation/documentation_e2e.md
+const fs = require('fs');
+let secretObject;
+
+let username = '';
+let password = '';
+
 export class HomePage {
   navigateTo(): promise.Promise<any> {
     return browser.get('/');
@@ -16,6 +24,7 @@ export class HomePage {
       });
       return 'highlighted';
     }
+
     return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
   }
 
@@ -115,7 +124,7 @@ export class HomePage {
     return title;
   }
 
-  clickGayHall(){
+  clickGayHall() {
     this.click('gayId');
   }
 
@@ -143,11 +152,11 @@ export class HomePage {
     return element.all(by.className('brokens'));
   }
 
-  clickRoomPanel(){
+  clickRoomPanel() {
     this.click('home-rooms-card');
   }
 
-  clickAllRooms(){
+  clickAllRooms() {
     this.click('allRooms');
   }
 
@@ -179,6 +188,53 @@ export class HomePage {
   getTextFromField(idOfField: string) {
     this.highlightElement(by.id(idOfField));
     return element(by.id(idOfField)).getText();
+  }
+
+  get_username_and_password(isAdmin: Boolean): void {
+
+    fs.readFile('./e2e/googleSecrets.json', function read(err, data) {
+      if (err) {
+        throw err;
+      }
+
+      secretObject = data;
+      const secretJSON = JSON.parse( secretObject.toString() );
+      if (isAdmin) {
+        username = secretJSON['adminUsername'];
+        password = secretJSON['adminPassword'];
+      } else {
+        username = secretJSON['plebUsername'];
+        password = secretJSON['plebPassword'];
+      }
+    });
+
+  }
+
+  logIn(isAdmin: Boolean): void {
+    this.get_username_and_password(isAdmin);
+
+    browser.get('/');
+    this.click('signIn');
+
+    const handlesPromise = browser.driver.getAllWindowHandles();
+
+    handlesPromise.then(function(handles) {
+
+      const signInHandle = handles[1];
+      browser.driver.switchTo().window(signInHandle);
+
+      browser.waitForAngularEnabled(false);
+
+      element(by.id('identifierId')).sendKeys(username);
+      browser.actions().sendKeys(Key.ENTER).perform();
+
+      element(by.name('password')).sendKeys(password);
+      browser.actions().sendKeys(Key.ENTER).perform();
+
+      browser.driver.switchTo().window(handles[0]);
+
+      browser.driver.sleep(1000);
+    });
   }
 
 }

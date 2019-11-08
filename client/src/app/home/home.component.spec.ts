@@ -12,14 +12,6 @@ describe('Home page', () => {
 
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let de: DebugElement;
-  let df: DebugElement;
-  let dg: DebugElement;
-  let dh: DebugElement;
-  let el: HTMLElement;
-  let fl: HTMLElement;
-  let gl: HTMLElement;
-  let hl: HTMLElement;
 
   let homeServiceStub: {
     getRooms: () => Observable<Room[]>;
@@ -74,36 +66,6 @@ describe('Home page', () => {
     fixture = TestBed.createComponent(HomeComponent);
 
     component = fixture.componentInstance; // BannerComponent test instance
-
-    // query for the link (<a> tag) by CSS element selector
-    de = fixture.debugElement.query(By.css('#home-rooms-card'));
-    df = fixture.debugElement.query(By.css('#home-machines-card-washer'));
-    dg = fixture.debugElement.query(By.css('#home-machines-card-dryer'));
-    dh = fixture.debugElement.query(By.css('#home-machines-card-broken'));
-    el = de.nativeElement;
-    fl = df.nativeElement;
-    gl = dg.nativeElement;
-    hl = dh.nativeElement;
-  });
-
-  it('displays a text of rooms', () => {
-    fixture.detectChanges();
-    expect(el.textContent).toContain('Please select a laundry room here');
-  });
-
-  it('displays a text of washers', () => {
-    fixture.detectChanges();
-    expect(fl.textContent).toContain('Washers available within all rooms');
-  });
-
-  it('displays a text of dryers', () => {
-    fixture.detectChanges();
-    expect(gl.textContent).toContain('Dryers available within all rooms');
-  });
-
-  it('displays a text of broken machines', () => {
-    fixture.detectChanges();
-    expect(hl.textContent).toContain('Unavailable machines within all rooms');
   });
 
   it('update room info when a new room is selected', () => {
