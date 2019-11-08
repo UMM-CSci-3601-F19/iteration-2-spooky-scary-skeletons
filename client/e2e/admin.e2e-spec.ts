@@ -1,5 +1,5 @@
 import {AppPage} from './app.po';
-
+// more to add later... no admin page yet ;)
 describe('angular-spark-lab', () => {
   let page: AppPage;
 
@@ -9,10 +9,5 @@ describe('angular-spark-lab', () => {
 
   it('should load', () => {
     page.navigateTo();
-  });
-
-  it('should get and highlight Home title attribute ', () => {
-    page.navigateTo();
-    expect(page.getPageTitle()).toEqual('UMM LAUNDRYSERV');
   });
 });

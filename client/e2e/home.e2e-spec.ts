@@ -2,6 +2,10 @@ import {HomePage} from './home.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
+// TESTING WRITTEN BY RAMBUNCTIOUS-RACCOONS AND EMMA OSWOOD
+// IN ORDER FOR E2E TESTING TO WORK-- TRIGGER THE BOOLEANS IN LAUNDRYCONTROLLER AND HOME.SERVICE.TS
+// ALSO-- RUNNING CLEAR MONGODB + SEED MONGODB HELPS FUNCTIONALITY.
+
 // This line (combined with the function that follows) is here for us
 // to be able to see what happens (part of slowing things down)
 // https://hassantariqblog.wordpress.com/2015/11/09/reduce-speed-of-angular-e2e-protractor-tests/
@@ -9,7 +13,7 @@ import {Key} from 'selenium-webdriver';
 const origFn = browser.driver.controlFlow().execute;
 
 browser.driver.controlFlow().execute = function () {
-  let args = arguments;
+  const args = arguments;
 
   // queue 100ms wait between test
   // This delay is only put here so that you can watch the browser do its thing.
@@ -23,14 +27,14 @@ browser.driver.controlFlow().execute = function () {
 };
 
 
-describe('home', () => {
+describe('Home', () => {
   let page: HomePage;
 
   beforeEach(() => {
     page = new HomePage();
   });
 
-  it('should get and highlight Home panel title attribute', () => {
+  it('should get and highlight Home title attribute', () => {
     page.navigateTo();
     expect(page.getHomePanelTitle()).toEqual('Please select a laundry room here');
   });
@@ -41,7 +45,7 @@ describe('home', () => {
     expect(page.getIndependenceHallTitleInHomePanel()).toEqual('Independence Hall');
     expect(page.getBlakelyHallTitleInHomePanel()).toEqual('Blakely Hall');
     expect(page.getSpoonerHallTitleInHomePanel()).toEqual('Spooner Hall');
-    expect(page.getGreenPrairieHallTitleInHomePanel()).toEqual('Green Prairie');
+    expect(page.getGreenPrairieHallTitleInHomePanel()).toEqual('Green Prairie Hall');
     expect(page.getPineHallTitleInHomePanel()).toEqual('Pine Hall');
     expect(page.getApartmentHallTitleInHomePanel()).toEqual('The Apartments');
   });
@@ -81,7 +85,7 @@ describe('home', () => {
     page.clickGayHall();
     page.getWashers().then((washers) => {
       expect(washers.length).toBe(4);
-    })
+    });
   });
 
   it('should get and have correct number of gay\'s dryers', () => {
@@ -89,7 +93,7 @@ describe('home', () => {
     page.clickGayHall();
     page.getDryers().then((dryers) => {
       expect(dryers.length).toBe(4);
-    })
+    });
   });
 
   it('should get and have correct number of gay\'s broken machines', () => {
@@ -97,7 +101,7 @@ describe('home', () => {
     page.clickGayHall();
     page.getBrokens().then((brokens) => {
       expect(brokens.length).toBe(5);
-    })
+    });
   });
 
   it('should get and have correct number of washers and dryers in total when click All Rooms', () => {
@@ -107,19 +111,32 @@ describe('home', () => {
     page.clickAllRooms();
     page.getWashers().then((washers) => {
       expect(washers.length).toBe(31);
-    })
+    });
     page.getDryers().then((dryers) => {
       expect(dryers.length).toBe(30);
-    })
+    });
   });
 
   it('should change time left in panel title', () => {
     page.navigateTo();
-    var a = page.getUniqueMachine('f714b475-5db7-4eeb-a6e0-b17921f0c477');
+    const a = page.getUniqueMachine('f714b475-5db7-4eeb-a6e0-b17921f0c477');
     browser.sleep(60000);
     page.navigateTo();
-    var b = page.getUniqueMachine('f714b475-5db7-4eeb-a6e0-b17921f0c477');
+    const b = page.getUniqueMachine('f714b475-5db7-4eeb-a6e0-b17921f0c477');
     expect(a).not.toEqual(b);
   }, 70000);
+
+  // it('should login w/ Admin credentials', () => {
+  //   page.navigateTo();
+  //   // can't run yet--- no admin google account set up yet ;-;
+  //   // page.logIn(true);
+  //   // add code confirming admin status (not completed code side yet?
+  //   // page.logOut(); -- absolutely no functionality for this exists in our code yet ;-;
+  // });
+  //
+  // it('should fail to login w/ credentials that are not admin', () => {
+  //   page.navigateTo();
+  //   // page.logIn(false); -- no fake account set up yet ;-;
+  // });
 });
 
